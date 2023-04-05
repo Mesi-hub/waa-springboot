@@ -1,7 +1,6 @@
 package miu.edu.lab1.repo;
 
 import miu.edu.lab1.domain.Post;
-import miu.edu.lab1.domain.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,11 +10,11 @@ import java.util.List;
 public class PostRepoImpl implements PostRepo {
 
     private static List<Post> posts;
-    private static Long postId = 100L;
+    private static Long postId = 300L;
     static{
         posts = new ArrayList<>();
         Post p1 = new Post(101L, "Lab 1 Demo", "RESTful", "Mesi");
-        Post p2 = new Post(200L, "Lab 1 Demo", "RESTful", "Abebe");
+        Post p2 = new Post(102L, "Lab 1 Demo", "RESTful", "Abebe");
         posts.add(p1);
         posts.add(p2);
     }
@@ -32,12 +31,19 @@ public class PostRepoImpl implements PostRepo {
 
     @Override
     public void update(int id, Post p) {
-
+        Post toUpdate = getById(id);
+        toUpdate.setTitle(p.getTitle());
+        toUpdate.setContent(p.getContent());
+        toUpdate.setAuthor(p.getAuthor());
     }
 
     @Override
     public void delete(int id) {
-
+        var post = posts
+                .stream()
+                .filter(l ->l.getId()==id)
+                .findFirst().get();
+        posts.remove(post);
     }
 
     public Post getById(int id){
@@ -47,8 +53,6 @@ public class PostRepoImpl implements PostRepo {
                 .findFirst()
                 .orElse(null);
     }
-
-
 
     @Override
     public Post findById() {

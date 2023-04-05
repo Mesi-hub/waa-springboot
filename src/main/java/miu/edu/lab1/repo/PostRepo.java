@@ -1,7 +1,6 @@
 package miu.edu.lab1.repo;
 
 import miu.edu.lab1.domain.Post;
-import miu.edu.lab1.domain.Product;
 
 import java.util.List;
 

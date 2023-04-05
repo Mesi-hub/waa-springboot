@@ -1,18 +1,17 @@
 package miu.edu.lab1.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import miu.edu.lab1.domain.Post;
 import miu.edu.lab1.repo.PostRepo;
 import miu.edu.lab1.service.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
-
-    @Autowired
-    PostRepo postRepo;
+    private final PostRepo postRepo;
 
     @Override
     public Post findById() {

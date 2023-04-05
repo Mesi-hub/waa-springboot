@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/posts")  //api/v1/posts
+@RequestMapping("posts")  //api/v1/posts
 public class PostController {
 
     @Autowired
@@ -18,8 +18,10 @@ public class PostController {
     public List<Post> findAll(){
         return postService.findAll();
     }
+
     @PostMapping
     public void save(@RequestBody Post post){
-       // return; postService.save(post);
+        postService.save(post);
     }
+
 }
