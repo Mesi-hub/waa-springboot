@@ -1,11 +1,10 @@
 package miu.edu.lab1.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Component
@@ -15,4 +14,10 @@ public class Post {
     String content;
     String author;
 
+    public Post(Long id, String title, String content, String author) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.author = author;
+    }
 }
