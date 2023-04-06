@@ -1,6 +1,6 @@
-package miu.edu.lab1.repo;
+package miu.edu.lab2.repo;
 
-import miu.edu.lab1.domain.Post;
+import miu.edu.lab2.domain.Post;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
