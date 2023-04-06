@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PostRepo {
 
-    public Post findById();
+    //public Post findById();
 
     public List<Post> findAll();
 
@@ -16,7 +16,7 @@ public interface PostRepo {
 
     public void update(int id, Post p);
 
-    public void delete(int id);
+    public void deleteById(int id);
 
 
 }

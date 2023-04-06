@@ -35,10 +35,16 @@ public class PostRepoImpl implements PostRepo {
         toUpdate.setTitle(p.getTitle());
         toUpdate.setContent(p.getContent());
         toUpdate.setAuthor(p.getAuthor());
+        var post = posts
+                .stream()
+                .filter(l ->l.getId()==id)
+                .findFirst().get();
+        posts.remove(post);
+        posts.add(toUpdate);
     }
 
     @Override
-    public void delete(int id) {
+    public void deleteById(int id) {
         var post = posts
                 .stream()
                 .filter(l ->l.getId()==id)
@@ -54,10 +60,10 @@ public class PostRepoImpl implements PostRepo {
                 .orElse(null);
     }
 
-    @Override
-    public Post findById() {
-        return new Post(1L, "Spring Demo","MVC", "Meseret");
-    }
+//    @Override
+//    public Post findById(int id) {
+//        return new Post(1L, "Spring Demo","MVC", "Meseret");
+//    }
 
 
 
