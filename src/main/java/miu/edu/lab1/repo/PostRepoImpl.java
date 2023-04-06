@@ -59,12 +59,4 @@ public class PostRepoImpl implements PostRepo {
                 .findFirst()
                 .orElse(null);
     }
-
-//    @Override
-//    public Post findById(int id) {
-//        return new Post(1L, "Spring Demo","MVC", "Meseret");
-//    }
-
-
-
 }

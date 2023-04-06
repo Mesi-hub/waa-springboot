@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface PostService {
 
-    //public Post findById();
-
     public List<Post> findAll();
 
     public Post getById(int id);
