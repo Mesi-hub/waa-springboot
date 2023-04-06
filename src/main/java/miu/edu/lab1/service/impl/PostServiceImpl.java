@@ -13,11 +13,6 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
     private final PostRepo postRepo;
 
-//    @Override
-//    public Post findById() {
-//        return postRepo.findById();
-//    }
-
     @Override
     public List<Post> findAll() {
         return postRepo.findAll();
