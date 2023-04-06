@@ -1,16 +1,16 @@
-package miu.edu.lab1;
+package miu.edu.lab2;
 
-import miu.edu.lab1.domain.Post;
+import miu.edu.lab2.domain.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Lab1Application {
+public class Lab2Application {
 	@Autowired
 	Post post;
 	public static void main(String[] args) {
-		SpringApplication.run(Lab1Application.class, args);
+		SpringApplication.run(Lab2Application.class, args);
 	}
 
 }

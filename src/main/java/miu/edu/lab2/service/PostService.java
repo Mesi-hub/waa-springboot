@@ -1,6 +1,6 @@
-package miu.edu.lab1.service;
+package miu.edu.lab2.service;
 
-import miu.edu.lab1.domain.Post;
+import miu.edu.lab2.domain.Post;
 
 import java.util.List;
 

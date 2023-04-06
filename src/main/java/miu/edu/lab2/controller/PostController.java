@@ -1,7 +1,7 @@
-package miu.edu.lab1.controller;
+package miu.edu.lab2.controller;
 
-import miu.edu.lab1.domain.Post;
-import miu.edu.lab1.service.PostService;
+import miu.edu.lab2.domain.Post;
+import miu.edu.lab2.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
