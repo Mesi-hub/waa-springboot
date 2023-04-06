@@ -13,10 +13,10 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
     private final PostRepo postRepo;
 
-    @Override
-    public Post findById() {
-        return postRepo.findById();
-    }
+//    @Override
+//    public Post findById() {
+//        return postRepo.findById();
+//    }
 
     @Override
     public List<Post> findAll() {
@@ -25,7 +25,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post getById(int id) {
-        return postRepo.findById();
+        return postRepo.getById(id);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void delete(int id) {
-        postRepo.delete(id);
+    public void deleteById(int id) {
+        postRepo.deleteById(id);
     }
 }
