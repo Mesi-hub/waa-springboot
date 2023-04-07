@@ -1,7 +1,7 @@
 
 package miu.edu.lab2.controllers;
 
-import miu.edu.lab2.service.IPostService;
+import miu.edu.lab2.service.PostService;
 import miu.edu.lab2.dto.PostDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
