@@ -1,43 +1,87 @@
 package miu.edu.lab2.controller;
 
-import miu.edu.lab2.domain.Post;
+import lombok.AllArgsConstructor;
+import miu.edu.lab2.entity.Post;
+import miu.edu.lab2.entity.dto.PostDto;
+import miu.edu.lab2.repo.PostRepo;
 import miu.edu.lab2.service.PostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
+//@NoArgsConstructor
+@AllArgsConstructor
 @RestController
-@RequestMapping("posts")
+@RequestMapping("/posts")
 public class PostController {
 
+    private final PostService postService;
+    private final ModelMapper modelMapper;
+    private PostRepo postRepo;
+
     @Autowired
-    PostService postService;
-
-    @GetMapping
-    public List<Post> findAll(){
-        return postService.findAll();
+    public PostController(PostService postService, ModelMapper modelMapper) {
+        this.postService = postService;
+        this.modelMapper = modelMapper;
     }
 
-    @PostMapping
-    public void save(@RequestBody Post post){
-        postService.save(post);
+    @GetMapping("/")
+    public List<PostDto> getAllPosts() {
+        List<Post> posts = postService.getAllPosts();
+        return posts.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getById(@PathVariable int id) {
-        var post = postService.getById(id);
-        return ResponseEntity.ok(post);
+    public PostDto getPostById(@PathVariable Long id) {
+        Post post = postService.getPostById(id);
+        return convertToDto(post);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable int id) {
-        postService.deleteById(id);
-        return ResponseEntity.ok("OK deleted");
+    @PostMapping("/")
+    public PostDto savePost(@RequestBody PostDto postDto) {
+        Post post = convertToEntity(postDto);
+        Post savedPost = postService.savePost(post);
+        return convertToDto(savedPost);
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody Post post, @PathVariable int id){
-        postService.update(id,post);
+    public ResponseEntity<PostDto> updatePost(@PathVariable Long id, @RequestBody PostDto postDto) {
+        Post postToUpdate = postService.getPostById(id);
+        if (postToUpdate == null) {
+            return ResponseEntity.notFound().build();
+        }
+        postToUpdate.setTitle(postDto.getTitle());
+        postToUpdate.setContent(postDto.getContent());
+        postToUpdate.setAuthor(postDto.getAuthor());
+        Post updatedPost = postService.savePost(postToUpdate);
+        PostDto updatedPostDto = convertToDto(updatedPost);
+        return ResponseEntity.ok(updatedPostDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+        Post postToDelete = postService.getPostById(id);
+        if (postToDelete == null) {
+            return ResponseEntity.notFound().build();
+        }
+        postService.deletePostById();
+        return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/posts")
+    public List<Post> getPostsByAuthor(@RequestParam("author") String author) {
+        return postRepo.findByAuthor(author);
+    }
+
+    private PostDto convertToDto(Post post) {
+        return new PostDto(post.getId(), post.getTitle(), post.getContent(), post.getAuthor());
+    }
+
+    private Post convertToEntity(PostDto postDto) {
+        return new Post(postDto.getId(), postDto.getTitle(), postDto.getContent(), postDto.getAuthor());
     }
 }

@@ -2,7 +2,7 @@ spring:
   application:
     name: postgres
   datasource:
-    password: 1
+    password: Admin
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
   jpa:
@@ -10,7 +10,7 @@ spring:
       ddl-auto: create-drop
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgresSQLDialect
         format_sql: true
     show-sql: true
     defer-datasource-initialization: true
