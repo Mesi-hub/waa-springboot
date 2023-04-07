@@ -1,11 +1,9 @@
 package miu.edu.lab2.controllers;
-
-
 import miu.edu.lab2.dto.PostDto;
 import miu.edu.lab2.dto.UserDto;
 import miu.edu.lab2.entity.Post;
 import miu.edu.lab2.entity.User;
-import miu.edu.lab2.service.IUserService;
+import miu.edu.lab2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -20,7 +18,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private IUserService userService;
+    private UserService userService;
 
     @GetMapping()
     public List<UserDto> findAll() {
