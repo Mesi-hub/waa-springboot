@@ -1,4 +1,4 @@
-package miu.edu.lab1.domain;
+package miu.edu.lab3.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

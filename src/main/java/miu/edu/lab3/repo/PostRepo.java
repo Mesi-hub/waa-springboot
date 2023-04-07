@@ -1,10 +1,10 @@
-package miu.edu.lab1.service;
+package miu.edu.lab3.repo;
 
-import miu.edu.lab1.domain.Post;
+import miu.edu.lab3.domain.Post;
 
 import java.util.List;
 
-public interface PostService {
+public interface PostRepo {
 
     public List<Post> findAll();
 
@@ -15,5 +15,6 @@ public interface PostService {
     public void update(int id, Post p);
 
     public void deleteById(int id);
+
 
 }

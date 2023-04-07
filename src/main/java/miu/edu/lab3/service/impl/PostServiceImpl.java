@@ -1,9 +1,9 @@
-package miu.edu.lab1.service.impl;
+package miu.edu.lab3.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import miu.edu.lab1.domain.Post;
-import miu.edu.lab1.repo.PostRepo;
-import miu.edu.lab1.service.PostService;
+import miu.edu.lab3.domain.Post;
+import miu.edu.lab3.repo.PostRepo;
+import miu.edu.lab3.service.PostService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
