@@ -1,4 +1,4 @@
-package miu.edu.lab2.repository;
+package miu.edu.lab2.repo;
 
 import miu.edu.lab2.entity.Post;
 import org.springframework.data.repository.CrudRepository;
