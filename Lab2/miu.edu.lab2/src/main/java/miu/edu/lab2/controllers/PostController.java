@@ -15,7 +15,7 @@ import java.util.List;
 public class PostController {
 
     @Autowired
-    private IPostService postsService;
+    private PostService postsService;
 
     @GetMapping()
     public List<PostDto> findAllPosts() {
