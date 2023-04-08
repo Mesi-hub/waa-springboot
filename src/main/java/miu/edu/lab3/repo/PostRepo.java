@@ -1,20 +1,26 @@
 package miu.edu.lab3.repo;
 
-import miu.edu.lab3.domain.Post;
+import miu.edu.lab3.entity.Post;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface PostRepo {
+@Repository
+public interface PostRepo extends CrudRepository<Post, Long> {
 
-    public List<Post> findAll();
+    //public List<Post> findByPriceGreaterThan(float price);
 
-    public Post getById(int id);
+//    @Query(value = "SELECT * FROM POST WHERE AUTHOR = :author", nativeQuery = true)
+//    public List<Post> findByAuthor(@Param("author") String author);
 
-    public void save(Post p);
+/*
+    @Query( "select p from Post p where count(p.reviews) >= :num" )
+    public List<Post> findProductWithReviews(int num); // 10
 
-    public void update(int id, Post p);
+ */
 
-    public void deleteById(int id);
+    public List<Post> findPostByTitle(String title);
 
 
 }
