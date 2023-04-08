@@ -13,6 +13,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CommentImpl implements CommentService {
+
     private final CommentRepo commentRepo;
 
     @Autowired

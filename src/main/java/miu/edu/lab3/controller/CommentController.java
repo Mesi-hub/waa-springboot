@@ -1,7 +1,13 @@
 package miu.edu.lab3.controller;
 
+import miu.edu.lab3.entity.Comment;
+import miu.edu.lab3.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
