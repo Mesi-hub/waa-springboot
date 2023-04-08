@@ -1,16 +1,20 @@
 package miu.edu.lab3.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "users")
 @Data
+@Table(name = "users")
 public class User {
 
     @Id
@@ -19,11 +23,9 @@ public class User {
     private long id;
     private String name;
 
-
-    //@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @OneToMany
-    @JsonManagedReference
-    @Fetch(FetchMode.SELECT)
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private List<Post> posts;
+    @Fetch(FetchMode.SUBSELECT)
+    @JsonBackReference
+    List<Post> posts;
 }

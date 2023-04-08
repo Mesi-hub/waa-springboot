@@ -1,7 +1,6 @@
 package miu.edu.lab3.controller;
 
 import miu.edu.lab3.entity.Post;
-import miu.edu.lab3.entity.dto.PostDto;
 import miu.edu.lab3.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,10 +28,10 @@ public class PostController {
 //        return "Hello";
 //    }
 //    //TODO - implement findById method. It returns only portion of data => Payload.
-    @GetMapping("/dto/{id}")
-    public PostDto getByIdDto(@PathVariable("id") int id){
-        return postService.getByIdDto(id);
-    }
+//    @GetMapping("/dto/{id}")
+//    public PostDto getByIdDto(@PathVariable("id") int id){
+//        return postService.getByIdDto(id);
+//    }
 
     @GetMapping
     public List<Post> findAll(){
@@ -48,11 +47,11 @@ public class PostController {
     }
 
 
-        @DeleteMapping("/{id}")
-        public ResponseEntity<String> deleteById(@PathVariable int id) {
-            postService.deleteById(id);
-            return ResponseEntity.ok("OK deleted");
-        }
+//        @DeleteMapping("/{id}")
+//        public ResponseEntity<String> deleteById(@PathVariable int id) {
+//            postService.deleteById(id);
+//            return ResponseEntity.ok("OK deleted");
+//        }
 
 //        //Recommended way
 //        @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -67,8 +66,8 @@ public class PostController {
             postService.save(post);
         }
 
-        @PutMapping("/{id}")
-        public void update(@RequestBody Post post, @PathVariable int id){
-            postService.update(id,post);
-        }
+//        @PutMapping("/{id}")
+//        public void update(@RequestBody Post post, @PathVariable int id){
+//            postService.update(id,post);
+//        }
     }
