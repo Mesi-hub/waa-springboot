@@ -49,19 +49,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post findById(int id) {
-        return null;
+    public void  save(Post post) {
+         postRepo.save(post);
     }
 
-    @Override
-    public Post getById(int id) {
-        return null;
-    }
-
-    @Override
-    public void save(Post p) {
-
-    }
 
     @Override
     public void delete(Long id) {

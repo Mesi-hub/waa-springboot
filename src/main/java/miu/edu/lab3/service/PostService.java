@@ -10,14 +10,14 @@ public interface PostService {
     public List<Post> findAll();
 
     public Post findById(int id);
-//
+
 //    public Post getById(int id);
 //
 //    public void save(Post p);
 
-   // public void update(int id, Post p);
-
-   // public void deleteById(int id);
+//    public void update(int id, Post p);
+//
+//    public void deleteById(int id);
 
     Post getById(int id);
 
