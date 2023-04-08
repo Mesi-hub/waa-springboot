@@ -2,13 +2,15 @@ package miu.edu.lab3.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
-@Entity
+
 @Data
+@Component
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+@Table(name = "comments")
 public class Comment {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
