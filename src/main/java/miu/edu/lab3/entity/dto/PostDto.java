@@ -1,6 +1,16 @@
 package miu.edu.lab3.entity.dto;
 
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@Data
 public class PostDto {
-    Long id;
-    String content;
+    private long id;
+    private String title;
+    private String content;
+    private String author;
+    private int userId;
 }

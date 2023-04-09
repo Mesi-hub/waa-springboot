@@ -2,6 +2,7 @@ package miu.edu.lab3.controller;
 
 import lombok.RequiredArgsConstructor;
 import miu.edu.lab3.entity.User;
+import miu.edu.lab3.entity.dto.UserDto;
 import miu.edu.lab3.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ public class UserController {
     //TODO - implement @PostMapping for users
 
     @PostMapping()
-    public ResponseEntity<String> save(@RequestBody User newUser) {
+    public ResponseEntity<String> save(@RequestBody UserDto newUser) {
         userService.save(newUser);
         return  ResponseEntity.status(HttpStatus.CREATED).body("Added successfully.");
     }

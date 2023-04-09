@@ -1,6 +1,7 @@
 package miu.edu.lab3.service.impl;
 
 import miu.edu.lab3.entity.User;
+import miu.edu.lab3.entity.dto.UserDto;
 import miu.edu.lab3.repo.UserRepo;
 import miu.edu.lab3.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -22,8 +23,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
-        var newUser = modelMapper.map(user, User.class);
+    public void save(UserDto userDto) {
+        var newUser = modelMapper.map(userDto, User.class);
         userRepo.save(newUser);
     }
     @Override
