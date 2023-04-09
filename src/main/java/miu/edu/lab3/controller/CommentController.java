@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
-    private final CommentService commentService;
+
+    @Autowired
+    private  CommentService commentService;
 
     @Autowired
     public CommentController(CommentService commentService) {
@@ -22,7 +23,7 @@ public class CommentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Comment> getCommentById(@PathVariable Long id) {
-        Comment comment = commentService.getCommentById(id);
+        Comment comment = commentService.getById(id);
         if (comment != null) {
             return new ResponseEntity<>(comment, HttpStatus.OK);
         } else {
@@ -32,23 +33,19 @@ public class CommentController {
 
     @PostMapping
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
-        Comment createdComment = commentService.createComment(comment);
-        return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
+        commentService.save(comment);
+        return new ResponseEntity<>(comment, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Comment> updateComment(@PathVariable Long id, @RequestBody Comment comment) {
-        Comment updatedComment = commentService.updateComment(id, comment);
-        if (updatedComment != null) {
-            return new ResponseEntity<>(updatedComment, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        commentService.update(id, comment);
+        return new ResponseEntity<>(comment, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
-        boolean result = commentService.deleteComment(id);
+        boolean result = commentService.deleteById(id);
         if (result) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {

@@ -11,63 +11,45 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/posts")
-//@RequestMapping
 public class PostController {
 
     @Autowired
     PostService postService;
 
-//    @GetMapping
-//    public Post findById(int id){
-//        return new Post(200L,"RestAPI","Fake Data Demo","Meseret");
-//    }
-
-
-//    @GetMapping("/find")
-//    public String findText(){
-//        return "Hello";
-//    }
-//    //TODO - implement findById method. It returns only portion of data => Payload.
-//    @GetMapping("/dto/{id}")
-//    public PostDto getByIdDto(@PathVariable("id") int id){
-//        return postService.getByIdDto(id);
-//    }
-
     @GetMapping
-    public List<Post> findAll(){
+    public List<Post> findAll() {
         return postService.findAll();
     }
 
-
-
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getById(@PathVariable int id) {
-        var post = postService.getById(id);
+    public ResponseEntity<Post> getById(@PathVariable Long id) {
+        Post post = postService.getById(id);
+        if (post == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(post);
     }
 
-
-//        @DeleteMapping("/{id}")
-//        public ResponseEntity<String> deleteById(@PathVariable int id) {
-//            postService.deleteById(id);
-//            return ResponseEntity.ok("OK deleted");
-//        }
-
-//        //Recommended way
-//        @ResponseStatus(HttpStatus.NO_CONTENT)
-//        @DeleteMapping("/{id}")
-//        public void deleteById(@PathVariable int id) {
-//            postService.deleteById(id);
-//        }
-
-        @ResponseStatus(HttpStatus.CREATED)
-        @PostMapping
-        public void save(@RequestBody Post post){
-            postService.save(post);
-        }
-
-//        @PutMapping("/{id}")
-//        public void update(@RequestBody Post post, @PathVariable int id){
-//            postService.update(id,post);
-//        }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public void save(@RequestBody Post post) {
+        postService.save(post);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{id}")
+    public void update(@PathVariable Long id, @RequestBody Post post) {
+        postService.update(id, post);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
+        boolean deleted = postService.deleteById(id);
+        if (deleted) {
+            return ResponseEntity.ok("Post deleted");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+}

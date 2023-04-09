@@ -2,59 +2,60 @@ package miu.edu.lab3.service.impl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import miu.edu.lab3.entity.Post;
 import miu.edu.lab3.repo.PostRepo;
 import miu.edu.lab3.repo.UserRepo;
 import miu.edu.lab3.service.PostService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class PostServiceImpl implements PostService {
 
-    @Autowired
-    PostRepo postRepo;
-
-    @Autowired
-    UserRepo userRepo;
+    private final PostRepo postRepo;
+    private final UserRepo userRepo;
 
     @PersistenceContext
-    EntityManager entityManager;
-
+    private EntityManager entityManager;
 
     @Autowired
-    ModelMapper modelMapper; // TODO - Implement DTOs
+    private org.modelmapper.ModelMapper modelMapper; // TODO - Implement DTOs
 
     @Override
     public List<Post> findAll() {
-        Iterable<Post> iterable = postRepo.findAll();
-        List<Post> list = Streamable.of(iterable).toList();
-        return list;
+        return postRepo.findAll();
     }
 
     @Override
-    public void  save(Post post) {
-         postRepo.save(post);
+    public void save(Post post) {
+        postRepo.save(post);
     }
 
-
     @Override
-    public void delete(Long id) {
-        postRepo.deleteById(id);
+    public boolean deleteById(Long id) {
+        if (postRepo.existsById(id)) {
+            postRepo.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public Post getById(Long id) {
-        return postRepo.findById(id).get();
+        return postRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public void update(Long id, Post post) {
+        Post existingPost = postRepo.findById(id).orElse(null);
+        if (existingPost != null) {
+            existingPost.setTitle(post.getTitle());
+            existingPost.setContent(post.getContent());
+            postRepo.save(existingPost);
+        }
     }
 }
-
-//TODO - Implement remaining methods

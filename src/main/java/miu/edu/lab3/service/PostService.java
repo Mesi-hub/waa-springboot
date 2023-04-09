@@ -6,26 +6,13 @@ import java.util.List;
 
 public interface PostService {
 
-    //public PostDto getByIdDto(int id);
-    public List<Post> findAll();
-
-    public Post findById(int id);
-
-//    public Post getById(int id);
-//
-//    public void save(Post p);
-
-//    public void update(int id, Post p);
-//
-//    public void deleteById(int id);
-
-    Post getById(int id);
-
-    void save(Post p);
-
-    void delete(Long id);
+    List<Post> findAll();
 
     Post getById(Long id);
 
-    // Post getById(Long id);
+    void save(Post post);
+
+    void update(Long id, Post post);
+
+    boolean deleteById(Long id);
 }

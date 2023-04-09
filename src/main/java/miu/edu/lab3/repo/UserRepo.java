@@ -12,4 +12,6 @@ public interface UserRepo extends CrudRepository<User,Integer> {
 
     @Query(value = "SELECT * FROM users u WHERE u.id IN (SELECT p.user_id FROM posts p GROUP BY p.user_id HAVING count(*) > :count)", nativeQuery = true)
     public List<User> findUsersWithPosts(int count);
+
+    public List<User> getById(int id);
 }

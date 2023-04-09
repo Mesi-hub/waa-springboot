@@ -1,9 +1,9 @@
 spring:
   application:
-    name: spring-data-demo-1
+    name: postgres
   datasource:
     password: Admin
-    url: jdbc:postgresql://localhost:5432/spring-data-demo
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
   jpa:
     hibernate:
