@@ -10,7 +10,6 @@ import java.util.List;
 public interface PostRepo extends CrudRepository<Post, Long> {
 
     public List<Post> findAll();
-    public  List<Post> findPostsByTitle(String title);
-
+    public  List<Post> findPostsByTitleIgnoreCase(String title);
 
 }

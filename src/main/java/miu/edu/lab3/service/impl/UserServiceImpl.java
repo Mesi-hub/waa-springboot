@@ -22,6 +22,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void save(User user) {
+        var newUser = modelMapper.map(user, User.class);
+        userRepo.save(newUser);
+    }
+    @Override
     public List<User> findAll() {
         return (List<User>) userRepo.findAll();
     }
@@ -35,4 +40,27 @@ public class UserServiceImpl implements UserService {
     public void deleteById(int id) {
         userRepo.deleteById(id);
     }
+
+//    @Override
+//    public Comment findCommentById(int userId, int postId, int commentId) {
+//        var user = userRepo
+//                .findById(userId)
+//                .get();
+//
+//        var post = user
+//                .getPosts()
+//                .stream()
+//                .filter(p -> p.getId() == postId)
+//                .findFirst()
+//                .get();
+//
+//        var comm  = post
+//                .getComments()
+//                .stream()
+//                .filter(c -> c.getId() == commentId)
+//                .findFirst()
+//                .get();
+//
+//        return modelMapper.map(comm, Comment.class);
+//    }
 }
