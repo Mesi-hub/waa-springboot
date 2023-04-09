@@ -1,8 +1,7 @@
 package miu.edu.lab3.service.impl;
 
 import lombok.RequiredArgsConstructor;
-
-import miu.edu.lab3.entity.User;
+import miu.edu.lab3.controller.UserController;
 import miu.edu.lab3.repo.UserRepo;
 import miu.edu.lab3.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -30,12 +28,12 @@ public class UserServiceImpl implements UserService {
 //    }
 
     @Override
-    public List<User> findAll() {
+    public List<UserController> findAll() {
         return userRepo.findAll();
     }
 
     @Override
-    public User findById(int id) {
+    public UserController findById(int id) {
         return userRepo.findById(id);
     }
 

@@ -2,6 +2,7 @@ package miu.edu.lab3.service.impl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import miu.edu.lab3.entity.Post;
 import miu.edu.lab3.repo.PostRepo;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class PostServiceImpl implements PostService {
 
     @Autowired
@@ -29,17 +31,7 @@ public class PostServiceImpl implements PostService {
 
 
     @Autowired
-    ModelMapper modelMapper; // TODO - Implement DTOs so that the model mapper come on action.
-
-
-//    //To be used later once the ListMapper method is implemented
-//    @Override
-//    ListMapper listMapper;
-//
-//    @Override
-//    public List<PostDto> findAll(){
-//        return listMapper.mapList(postRepo.findAll(), new PostDto);
-//    }
+    ModelMapper modelMapper; // TODO - Implement DTOs
 
     @Override
     public List<Post> findAll() {
@@ -66,4 +58,3 @@ public class PostServiceImpl implements PostService {
 }
 
 //TODO - Implement remaining methods
-//TODO - Database configuration

@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class CommentImpl implements CommentService {
+@NoArgsConstructor
+public class CommentServiceImpl implements CommentService {
 
-    private final CommentRepo commentRepo;
+    @Autowired
+    CommentRepo commentRepo;
 
     @Autowired
     public CommentServiceImpl(CommentRepo commentRepo) {
