@@ -19,10 +19,6 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     CommentRepo commentRepo;
 
-    @Autowired
-    public CommentServiceImpl(CommentRepo commentRepo) {
-        this.commentRepo = commentRepo;
-    }
 
     @Override
     public Comment getCommentById(Long id) {
@@ -63,6 +59,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> getCommentsByPostId(Long postId) {
-        return commentRepo.findByPostId(postId);
+        return commentRepo.findById(postId);
     }
 }

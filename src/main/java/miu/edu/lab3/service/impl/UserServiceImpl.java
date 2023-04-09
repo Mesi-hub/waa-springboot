@@ -2,6 +2,7 @@ package miu.edu.lab3.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import miu.edu.lab3.controller.UserController;
+import miu.edu.lab3.entity.User;
 import miu.edu.lab3.repo.UserRepo;
 import miu.edu.lab3.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -18,29 +19,15 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
 
-//    @Override
-//    public Page<User> paging(PagingRequest pagingRequest) {
-//        var direction = (pagingRequest.isAscending()) ? Sort.Direction.ASC : Sort.Direction.DESC;
-//
-//        var request = PageRequest
-//                .of(pagingRequest.getPage(), pagingRequest.getPageSize(), direction,pagingRequest.getSortBy());
-//        return userRepo.findAll(request);
-//    }
-
     @Override
-    public List<UserController> findAll() {
+    public List<User> findAll() {
         return userRepo.findAll();
     }
 
     @Override
-    public UserController findById(int id) {
+    public User findById(int id) {
         return userRepo.findById(id);
     }
-
-//    @Override
-//    public UserDto findByIdDto(int id) {
-//        return modelMapper.map(userRepo.findById(id), UserDto.class);
-//    }
 
     @Override
     public void deleteById(int id) {
@@ -48,3 +35,5 @@ public class UserServiceImpl implements UserService {
 
     }
 }
+
+//TODO - fix bugs CommentServiceImpl
