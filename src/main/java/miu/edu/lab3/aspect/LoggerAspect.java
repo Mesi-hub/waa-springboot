@@ -18,9 +18,9 @@ public class LoggerAspect {
 
 
     @Pointcut("@annotation(miu.edu.lab3.aspect.annotation.LogInfo)")
-    public void Lab4LogInfo(){}
+    public void LogInfo(){}
 
-    @Before("Lab4LogInfo()")
+    @Before("LogInfo()")
     public void logBefore(JoinPoint joinPoint) {
         logOperation(joinPoint);
     }

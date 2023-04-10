@@ -18,11 +18,11 @@ public class ExecutionTimeAspect {
     private LoggerRepo loggerRepo;
 
     @Pointcut("@annotation(miu.edu.lab3.aspect.annotation.ExecutionTime)")
-    public void Lab4ExecutionTime() {
+    public void ExecutionTime() {
 
     }
 
-    @Around("Lab4ExecutionTime()")
+    @Around("ExecutionTime()")
     public Object calculateExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long start = System.nanoTime();
         var result = proceedingJoinPoint.proceed();
