@@ -1,6 +1,8 @@
 package miu.edu.lab3.controller;
 
 import lombok.RequiredArgsConstructor;
+import miu.edu.lab3.aspect.annotation.ExecutionTime;
+import miu.edu.lab3.aspect.annotation.LogInfo;
 import miu.edu.lab3.entity.User;
 import miu.edu.lab3.entity.dto.UserDto;
 import miu.edu.lab3.service.UserService;
@@ -17,15 +19,22 @@ public class UserController {
 
     private final UserService userService;
 
+
+    @ExecutionTime
+    @LogInfo
     @GetMapping
     public List<User> getUsers(){
         return userService.findAll();
     }
+
+    @ExecutionTime
+    @LogInfo
     @GetMapping("/{id}")
     public User getUsers(@PathVariable("id") int id){
         return userService.findById(id);
     }
 
+    @LogInfo
     @DeleteMapping ("/{id}")
     public void deleteUser(@PathVariable("id") int id){
         userService.deleteById(id);
@@ -41,6 +50,7 @@ public class UserController {
 
     //TODO - implement @PostMapping for users
 
+    @LogInfo
     @PostMapping()
     public ResponseEntity<String> save(@RequestBody UserDto newUser) {
         userService.save(newUser);
