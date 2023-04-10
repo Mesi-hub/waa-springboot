@@ -2,9 +2,7 @@ package miu.edu.lab3.aspect;
 
 import miu.edu.lab3.entity.ExceptionEntry;
 import miu.edu.lab3.repo.ExceptionRepo;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
