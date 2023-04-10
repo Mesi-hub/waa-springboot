@@ -1,5 +1,7 @@
 package miu.edu.lab3.controller;
 
+import miu.edu.lab3.aspect.annotation.ExecutionTime;
+import miu.edu.lab3.aspect.annotation.LogInfo;
 import miu.edu.lab3.entity.Post;
 import miu.edu.lab3.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,13 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    @ExecutionTime
+    @LogInfo
     @GetMapping
     public List<Post> findAll() {
         return postService.findAll();
     }
-
+    @LogInfo
     @GetMapping("/{id}")
     public ResponseEntity<Post> getById(@PathVariable Long id) {
         Post post = postService.getById(id);
@@ -29,19 +33,19 @@ public class PostController {
         }
         return ResponseEntity.ok(post);
     }
-
+    @LogInfo
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void save(@RequestBody Post post) {
         postService.save(post);
     }
-
+    @LogInfo
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     public void update(@PathVariable Long id, @RequestBody Post post) {
         postService.update(id, post);
     }
-
+    @LogInfo
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         boolean deleted = postService.deleteById(id);

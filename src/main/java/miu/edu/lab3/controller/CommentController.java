@@ -1,5 +1,7 @@
 package miu.edu.lab3.controller;
 
+import miu.edu.lab3.aspect.annotation.ExecutionTime;
+import miu.edu.lab3.aspect.annotation.LogInfo;
 import miu.edu.lab3.entity.Comment;
 import miu.edu.lab3.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class CommentController {
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
-
+    @LogInfo
     @GetMapping("/{id}")
     public ResponseEntity<Comment> getCommentById(@PathVariable Long id) {
         Comment comment = commentService.getById(id);
@@ -30,19 +32,19 @@ public class CommentController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+    @LogInfo
     @PostMapping
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
         commentService.save(comment);
         return new ResponseEntity<>(comment, HttpStatus.CREATED);
     }
-
+    @LogInfo
     @PutMapping("/{id}")
     public ResponseEntity<Comment> updateComment(@PathVariable Long id, @RequestBody Comment comment) {
         commentService.update(id, comment);
         return new ResponseEntity<>(comment, HttpStatus.OK);
     }
-
+    @LogInfo
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
         boolean result = commentService.deleteById(id);
@@ -52,7 +54,8 @@ public class CommentController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+    @LogInfo
+    @ExecutionTime
     @GetMapping("/post/{postId}")
     public ResponseEntity<List<Comment>> getCommentsByPostId(@PathVariable Long postId) {
         List<Comment> comments = commentService.getCommentsByPostId(postId);
