@@ -8,11 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/posts")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PostController {
 
     @Autowired
@@ -20,6 +21,7 @@ public class PostController {
 
     @ExecutionTime
     @LogInfo
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public List<Post> findAll() {
         return postService.findAll();

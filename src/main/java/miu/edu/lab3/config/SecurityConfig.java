@@ -23,7 +23,7 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JwtFilter jwtFilter;
 
-    String [] roles = {"CLIENT" , "ADMIN"}; // You can make this a call from the DB
+    String [] roles = {"USER" , "ADMIN"}; // You can make this a call from the DB
 //  String [] roles = {"CLIENT"}; // Try this :)
 
 
@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/authenticate/**").permitAll()
 //                .requestMatchers("/api/v1/products").hasAuthority("CLIENT")
-                .requestMatchers("/api/v1/products").hasAnyAuthority(roles) // Dynamic authorities
+                .requestMatchers("/api/v1/posts").hasAnyAuthority(roles) // Dynamic authorities
                 .anyRequest()
                 .authenticated()
                 .and()
