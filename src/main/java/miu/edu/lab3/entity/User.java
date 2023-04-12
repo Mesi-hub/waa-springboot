@@ -20,12 +20,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //@SequenceGenerator(name = "test", sequenceName = "user_id_seq")
-    private long id;
-    private String name;
+    private int id;
+
+    private String email;
+    private String password;
+    private String firstname;
+    private String lastname;
 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @Fetch(FetchMode.SUBSELECT)
     @JsonBackReference
     List<Post> posts;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable
+    private List<Role> roles;
 }
