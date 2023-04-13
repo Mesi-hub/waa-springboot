@@ -27,7 +27,7 @@ public class User {
     private String firstname;
     private String lastname;
 
-    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     @Fetch(FetchMode.SUBSELECT)
     @JsonBackReference

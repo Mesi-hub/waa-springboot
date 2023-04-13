@@ -2,9 +2,9 @@ package miu.edu.lab5.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import miu.edu.lab5.dto.request.LoginRequest;
-import miu.edu.lab5.dto.request.RefreshTokenRequest;
-import miu.edu.lab5.dto.response.LoginResponse;
+import miu.edu.lab5.entity.dto.request.LoginRequest;
+import miu.edu.lab5.entity.dto.request.RefreshTokenRequest;
+import miu.edu.lab5.entity.dto.response.LoginResponse;
 import miu.edu.lab5.service.AuthService;
 import miu.edu.lab5.util.JwtUtil;
 import org.springframework.security.authentication.AuthenticationManager;

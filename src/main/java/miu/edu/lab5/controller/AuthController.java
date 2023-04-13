@@ -1,9 +1,9 @@
 package miu.edu.lab5.controller;
 
 import miu.edu.lab5.service.AuthService;
-import miu.edu.lab5.dto.request.LoginRequest;
-import miu.edu.lab5.dto.request.RefreshTokenRequest;
-import miu.edu.lab5.dto.response.LoginResponse;
+import miu.edu.lab5.entity.dto.request.LoginRequest;
+import miu.edu.lab5.entity.dto.request.RefreshTokenRequest;
+import miu.edu.lab5.entity.dto.response.LoginResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

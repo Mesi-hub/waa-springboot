@@ -23,8 +23,10 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JwtFilter jwtFilter;
 
-    String [] roles = {"USER" , "ADMIN"}; // You can make this a call from the DB
+   String [] roles = {"USER" , "ADMIN"}; // You can make this a call from the DB
 //  String [] roles = {"CLIENT"}; // Try this :)
+
+    // TODO comeback here to fix the issue that USER is forbidden to access
 
 
     @Bean
@@ -44,7 +46,7 @@ public class SecurityConfig {
                 .csrf().disable().cors().and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/authenticate/**").permitAll()
-//                .requestMatchers("/api/v1/products").hasAuthority("CLIENT")
+             //   .requestMatchers("/api/v1/posts").hasAuthority("USER")
                 .requestMatchers("/api/v1/posts").hasAnyAuthority(roles) // Dynamic authorities
                 .anyRequest()
                 .authenticated()

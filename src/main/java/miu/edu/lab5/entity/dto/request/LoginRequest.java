@@ -1,4 +1,4 @@
-package miu.edu.lab5.dto.request;
+package miu.edu.lab5.entity.dto.request;
 
 
 import lombok.Builder;
