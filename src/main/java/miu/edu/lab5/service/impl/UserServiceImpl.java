@@ -1,5 +1,6 @@
 package miu.edu.lab5.service.impl;
 
+import miu.edu.lab5.entity.Comment;
 import miu.edu.lab5.entity.User;
 import miu.edu.lab5.entity.dto.UserDto;
 import miu.edu.lab5.repo.UserRepo;
@@ -42,26 +43,26 @@ public class UserServiceImpl implements UserService {
         userRepo.deleteById(id);
     }
 
-//    @Override
-//    public Comment findCommentById(int userId, int postId, int commentId) {
-//        var user = userRepo
-//                .findById(userId)
-//                .get();
-//
-//        var post = user
-//                .getPosts()
-//                .stream()
-//                .filter(p -> p.getId() == postId)
-//                .findFirst()
-//                .get();
-//
-//        var comm  = post
-//                .getComments()
-//                .stream()
-//                .filter(c -> c.getId() == commentId)
-//                .findFirst()
-//                .get();
-//
-//        return modelMapper.map(comm, Comment.class);
-//    }
+    @Override
+    public Comment findCommentById(int userId, int postId, int commentId) {
+        var user = userRepo
+                .findById(userId)
+                .get();
+
+        var post = user
+                .getPosts()
+                .stream()
+                .filter(p -> p.getId() == postId)
+                .findFirst()
+                .get();
+
+        var comm  = post
+                .getComments()
+                .stream()
+                .filter(c -> c.getId() == commentId)
+                .findFirst()
+                .get();
+
+        return modelMapper.map(comm, Comment.class);
+    }
 }

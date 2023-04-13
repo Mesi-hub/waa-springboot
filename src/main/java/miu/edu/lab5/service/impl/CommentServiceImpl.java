@@ -33,8 +33,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void delete(Long id) {
-        commentRepo.deleteById(id);
+    public boolean deleteById(Long id) {
+        if (commentRepo.existsById(id)) {
+            commentRepo.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -49,15 +53,6 @@ public class CommentServiceImpl implements CommentService {
             existingComment.setContent(comment.getContent());
             commentRepo.save(existingComment);
         }
-    }
-
-    @Override
-    public boolean deleteById(Long id) {
-        if (commentRepo.existsById(id)) {
-            commentRepo.deleteById(id);
-            return true;
-        }
-        return false;
     }
 
     @Override

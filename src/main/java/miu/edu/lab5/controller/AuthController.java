@@ -25,9 +25,4 @@ public class AuthController {
                 loginResponse, HttpStatus.OK);
     }
 
-//    @PostMapping("/refreshToken")
-//    public LoginResponse refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
-//        return authService.refreshToken(refreshTokenRequest);
-//    }
-
 }

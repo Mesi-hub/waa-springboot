@@ -2,6 +2,7 @@ package miu.edu.lab5.controller;
 
 import lombok.RequiredArgsConstructor;
 import miu.edu.lab5.aspect.annotation.*;
+import miu.edu.lab5.entity.Comment;
 import miu.edu.lab5.entity.User;
 import miu.edu.lab5.entity.dto.UserDto;
 import miu.edu.lab5.service.UserService;
@@ -37,20 +38,18 @@ public class UserController {
         userService.deleteById(id);
     }
 
-//    @GetMapping("/{userId}/posts/{postId}/comments/{commentId}")
-//    public User findCommentById(@PathVariable int userId,
-//                                      @PathVariable int postId,
-//                                      @PathVariable int commentId) {
-//
-//        return userService.findCommentById(userId, postId, commentId);
-//    }
+    @GetMapping("/{userId}/posts/{postId}/comments/{commentId}")
+    public Comment findCommentById(@PathVariable int userId,
+                                   @PathVariable int postId,
+                                   @PathVariable int commentId) {
 
-    //TODO - implement @PostMapping for users
+        return userService.findCommentById(userId, postId, commentId);
+    }
 
     @LogInfo
     @PostMapping()
     public ResponseEntity<String> save(@RequestBody UserDto newUser) {
         userService.save(newUser);
-        return  ResponseEntity.status(HttpStatus.CREATED).body("Added successfully.");
+        return  ResponseEntity.status(HttpStatus.CREATED).body("User added successfully.");
     }
 }

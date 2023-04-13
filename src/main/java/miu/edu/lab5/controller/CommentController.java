@@ -22,9 +22,15 @@ public class CommentController {
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
+
+    @GetMapping
+    public List<Comment> findAll() {
+        return commentService.findAll();
+    }
+
     @LogInfo
     @GetMapping("/{id}")
-    public ResponseEntity<Comment> getCommentById(@PathVariable Long id) {
+    public ResponseEntity<Comment> getById(@PathVariable Long id) {
         Comment comment = commentService.getById(id);
         if (comment != null) {
             return new ResponseEntity<>(comment, HttpStatus.OK);
