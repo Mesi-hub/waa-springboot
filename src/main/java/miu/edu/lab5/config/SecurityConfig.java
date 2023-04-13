@@ -46,7 +46,8 @@ public class SecurityConfig {
                 .csrf().disable().cors().and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/authenticate/**").permitAll()
-             //   .requestMatchers("/api/v1/posts").hasAuthority("USER")
+                .requestMatchers("/api/v1/users/**").permitAll()
+             //   .requestMatchers("/api/v1/users").hasAuthority("USER")
                 .requestMatchers("/api/v1/posts").hasAnyAuthority(roles) // Dynamic authorities
                 .anyRequest()
                 .authenticated()
