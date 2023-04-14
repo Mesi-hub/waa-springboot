@@ -1,6 +1,9 @@
 package miu.edu.lab6.util;
 
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
@@ -13,8 +16,9 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
+    @Autowired
     UserDetailsService userDetailsService;
-    private final String secret = "top-secret"; //TODO - handle it without hardcoded!
+    private final String secret = "top-secret";
     private final long expiration = 5 * 60 * 60 * 60;
     //     private final long expiration = 5;
     private final long refreshExpiration = 5 * 60 * 60 * 60 * 60;
@@ -52,6 +56,8 @@ public class JwtUtil {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("roles",userDetails.getAuthorities());
+
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
@@ -67,7 +73,7 @@ public class JwtUtil {
     }
 
     // Overridden to accommodate the refresh token
-    public String doGenerateToken( String subject) {
+    public String doGenerateToken(String subject) {
         return Jwts.builder()
                 .setSubject(subject)
                 .setIssuedAt(new Date())
@@ -113,7 +119,16 @@ public class JwtUtil {
         return false;
     }
 
-
+    public Authentication getAuthentication(String token) {
+        Claims claims = getAllClaimsFromToken(token);
+//        String username = claims.getSubject();
+//        var roles = (List<? extends GrantedAuthority>) claims.get("roles");
+//        UserDetails userDetails = new User(username, "", roles);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(claims.getSubject()); // LEFT THIS HERE ON PURPOSE
+        var authentication = new UsernamePasswordAuthenticationToken(
+                userDetails, null, userDetails.getAuthorities());
+        return authentication;
+    }
 
 
 

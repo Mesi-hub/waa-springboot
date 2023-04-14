@@ -7,7 +7,7 @@ import java.util.List;
 public interface CommentService {
     List<Comment> findAll();
     void save(Comment comment);
-    void delete(Long id);
+    //void delete(Long id);
     Comment getById(Long id);
     void update(Long id, Comment comment);
     boolean deleteById(Long id);

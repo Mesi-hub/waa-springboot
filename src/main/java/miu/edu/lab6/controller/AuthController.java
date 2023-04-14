@@ -20,13 +20,12 @@ public class AuthController {
         this.authService = authService;
     }
 
+    // receive a LoginRequest object in the request body and return a LoginResponse object in the response body.
     @PostMapping
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-
-
-
         var loginResponse = authService.login(loginRequest);
 
+        // set a refreshToken cookie in the response headers
         ResponseCookie cookie = ResponseCookie.from("refreshToken", loginResponse.getRefreshToken())
                 .httpOnly(true)
                 .maxAge(60*60*24)
@@ -38,6 +37,7 @@ return
         ResponseEntity.ok().headers(headers).body(loginResponse);
     }
 
+    //receive a RefreshTokenRequest object in the request body and return a LoginResponse object in the response body.
     @PostMapping("/refreshToken")
     public LoginResponse refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
         return authService.refreshToken(refreshTokenRequest);
