@@ -28,7 +28,7 @@ public class AuthController {
         // set a refreshToken cookie in the response headers
         ResponseCookie cookie = ResponseCookie.from("refreshToken", loginResponse.getRefreshToken())
                 .httpOnly(true)
-                .maxAge(60*60*24)
+                .maxAge(24*60*60)
                 .path("/")
                 .build();
         HttpHeaders headers = new HttpHeaders();
