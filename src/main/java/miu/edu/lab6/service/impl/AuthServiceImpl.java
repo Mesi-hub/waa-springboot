@@ -1,5 +1,8 @@
 package miu.edu.lab6.service.impl;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import miu.edu.lab6.entity.dto.request.LoginRequest;
@@ -11,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -24,6 +28,8 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final UserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
+
+    private final HttpServletRequest httpServletRequest;
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
@@ -62,4 +68,36 @@ public class AuthServiceImpl implements AuthService {
         }
         return new LoginResponse();
     }
+
+    @Override
+    public LoginResponse checkRefreshToken() throws ServletException {
+        Cookie[] cookies = httpServletRequest.getCookies();
+        if (cookies == null) {
+            httpServletRequest.logout();
+        }
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("refreshToken")) {
+                String refreshToken = cookie.getValue();
+                boolean isRefreshTokenValid = jwtUtil.validateToken(refreshToken);
+
+                if (isRefreshTokenValid) {
+                    var accessToken = jwtUtil.generateRefreshToken(jwtUtil.getSubject(refreshToken));
+                    System.out.println("***************************************");
+                    System.out.println("TOKEN REFRESHED as =>" + refreshToken);
+                    System.out.println("***************************************");
+
+                    SecurityContextHolder.getContext().setAuthentication(jwtUtil.getAuthentication(accessToken));
+                  return new LoginResponse(accessToken,refreshToken);
+                } else {
+                    System.out.println("***************************************");
+                    System.out.println("REFRESH TOKEN IS INVALID.");
+                    System.out.println("***************************************");
+                    httpServletRequest.logout();
+                }
+            } else {
+                httpServletRequest.logout();
+            }
+        }
+        return new LoginResponse();
+ }
 }

@@ -1,5 +1,6 @@
 package miu.edu.lab6.controller;
 
+import jakarta.servlet.ServletException;
 import miu.edu.lab6.entity.dto.request.LoginRequest;
 import miu.edu.lab6.entity.dto.request.RefreshTokenRequest;
 import miu.edu.lab6.entity.dto.response.LoginResponse;
@@ -43,6 +44,9 @@ return
         return authService.refreshToken(refreshTokenRequest);
     }
 
-
+    @PostMapping("/token/refreshToken")
+    public ResponseEntity <?> checkRefreshToken() throws ServletException {
+        return ResponseEntity.ok(authService.checkRefreshToken());
+    }
 
 }
